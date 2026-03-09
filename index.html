@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Montagrid Junior – Le Royaume Secret</title>
+  <link rel="icon" href="icon.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-icon">
+          <img src="icon.png" alt="Montagrid" onerror="this.style.display='none'; this.parentElement.innerHTML='🏰';">
+        </div>
+        <div>
+          <h1>Montagrid Junior – Le Royaume Secret</h1>
+          <p>Histoire, héros, lieux, illustrations, jeux et imagination</p>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div class="progress-pill">
+          <span id="progressText">0 / 12 chapitres</span>
+        </div>
+        <button id="homeBtn" class="ghost-btn">Accueil</button>
+      </div>
+    </header>
+
+    <section id="homeView" class="view active">
+      <div class="hero">
+        <div class="hero-text">
+          <h2>Entre dans le royaume de Montagrid</h2>
+          <p>
+            Lis l’histoire du Prince Théo, rencontre les héros, visite les lieux du royaume,
+            découvre les images des chapitres, joue et dessine ton propre univers.
+          </p>
+
+          <div class="hero-actions">
+            <button class="main-btn" data-open="storyView">📖 Lire l’histoire de Montagrid</button>
+            <button class="main-btn" data-open="charactersView">🧙 Rencontrer les héros de Montagrid</button>
+            <button class="main-btn" data-open="visitView">🗺️ Visiter Montagrid</button>
+            <button class="main-btn" data-open="liveView">🎞️ Vivre à Montagrid</button>
+            <button class="main-btn" data-open="gamesView">🎮 Jouer à Montagrid</button>
+            <button class="main-btn" data-open="drawView">🎨 Dessiner et imaginer</button>
+          </div>
+        </div>
+
+        <div class="hero-side">
+          <button class="hero-badge clickable-badge" data-open="storyView">12 chapitres à lire</button>
+          <button class="hero-badge clickable-badge" data-open="charactersView">Héros et habitants du royaume</button>
+          <button class="hero-badge clickable-badge" data-open="visitView">Lieux à explorer</button>
+          <button class="hero-badge clickable-badge" data-open="liveView">Illustrations de l’histoire</button>
+          <button class="hero-badge clickable-badge" data-open="gamesView">Quiz, énigmes, mots mêlés</button>
+          <button class="hero-badge clickable-badge" data-open="drawView">Grand espace dessin</button>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <button class="dash-card clickable-card" data-open="storyView">
+          <h3>📚 Lire</h3>
+          <p>Les 12 chapitres complets, avec narration audio.</p>
+        </button>
+
+        <button class="dash-card clickable-card" data-open="charactersView">
+          <h3>🪪 Héros</h3>
+          <p>Cartes retournables des personnages du royaume.</p>
+        </button>
+
+        <button class="dash-card clickable-card" data-open="visitView">
+          <h3>🏰 Visiter</h3>
+          <p>Carte, château, temple, souterrains et lieux secrets.</p>
+        </button>
+
+        <button class="dash-card clickable-card" data-open="liveView">
+          <h3>🌟 Vivre l’histoire</h3>
+          <p>Les illustrations des chapitres pour revivre l’aventure.</p>
+        </button>
+
+        <button class="dash-card clickable-card" data-open="gamesView">
+          <h3>🧩 Jouer</h3>
+          <p>QCM, vrai/faux, citations, énigmes et mots mêlés.</p>
+        </button>
+
+        <button class="dash-card clickable-card" data-open="drawView">
+          <h3>✏️ Imaginer</h3>
+          <p>Dessine ta propre scène et télécharge ton image.</p>
+        </button>
+      </div>
+    </section>
+
+    <section id="storyView" class="view">
+      <div class="section-head">
+        <h2>📖 Lire l’histoire de Montagrid</h2>
+
+        <div class="chapter-nav">
+          <button id="prevChapterBtn" class="small-btn">◀ Précédent</button>
+          <select id="chapterSelect"></select>
+          <button id="nextChapterBtn" class="small-btn">Suivant ▶</button>
+        </div>
+      </div>
+
+      <div class="story-layout">
+        <aside class="chapter-list-panel">
+          <h3>Chapitres</h3>
+          <div id="chapterList" class="chapter-list"></div>
+        </aside>
+
+        <article class="story-card">
+          <div class="story-media">
+            <img id="storyChapterImage" src="" alt="Illustration du chapitre">
+          </div>
+
+          <div class="story-tools">
+            <button id="speakBtn" class="small-btn">🔊 Narrer</button>
+            <button id="pauseBtn" class="small-btn">⏸ Pause</button>
+            <button id="resumeBtn" class="small-btn">▶ Reprendre</button>
+            <button id="stopBtn" class="small-btn">⏹ Stop</button>
+          </div>
+
+          <h3 id="chapterTitle"></h3>
+          <div id="chapterText" class="chapter-text"></div>
+
+          <div class="story-bottom-actions">
+            <button id="markChapterBtn" class="main-btn">⭐ Marquer ce chapitre comme terminé</button>
+            <button id="openCurrentGamesBtn" class="main-btn alt-btn">🎮 Jouer avec ce chapitre</button>
+          </div>
+
+          <div id="chapterReward" class="reward-box hidden"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="charactersView" class="view">
+      <div class="section-head">
+        <h2>🧙 Rencontrer les héros de Montagrid</h2>
+        <p>Survole ou clique une carte pour la retourner.</p>
+      </div>
+      <div id="charactersGrid" class="characters-grid"></div>
+    </section>
+
+    <section id="visitView" class="view">
+      <div class="section-head">
+        <h2>🗺️ Visiter Montagrid</h2>
+        <p>Découvre les lieux du royaume, ses secrets et ses chemins cachés.</p>
+      </div>
+      <div id="visitGrid" class="gallery-grid"></div>
+    </section>
+
+    <section id="liveView" class="view">
+      <div class="section-head">
+        <h2>🎞️ Vivre à Montagrid</h2>
+        <p>Les images des chapitres pour revivre l’histoire du Prince Théo.</p>
+      </div>
+      <div id="liveGrid" class="gallery-grid"></div>
+    </section>
+
+    <section id="gamesView" class="view">
+      <div class="section-head">
+        <h2>🎮 Jouer à Montagrid</h2>
+        <div class="chapter-nav">
+          <button id="gamesPrevBtn" class="small-btn">◀</button>
+          <select id="gamesChapterSelect"></select>
+          <button id="gamesNextBtn" class="small-btn">▶</button>
+        </div>
+      </div>
+
+      <div class="games-layout">
+        <div class="game-box">
+          <div class="box-title-row">
+            <h3 id="gamesChapterTitle"></h3>
+            <span class="chapter-chip">Chapitre interactif</span>
+          </div>
+          <p id="gamesIntro"></p>
+          <div id="gameReward" class="reward-inline"></div>
+        </div>
+
+        <div class="game-box">
+          <div class="box-title-row">
+            <h3>QCM</h3>
+            <button id="checkQuizBtn" class="small-btn">Vérifier</button>
+          </div>
+          <div id="quizContainer"></div>
+          <p id="quizResult" class="result-text"></p>
+        </div>
+
+        <div class="game-box">
+          <div class="box-title-row">
+            <h3>Vrai / Faux</h3>
+            <button id="checkTfBtn" class="small-btn">Vérifier</button>
+          </div>
+          <div id="tfContainer"></div>
+          <p id="tfResult" class="result-text"></p>
+        </div>
+
+        <div class="game-box">
+          <div class="box-title-row">
+            <h3>Qui a dit ?</h3>
+            <button id="checkQuoteBtn" class="small-btn">Vérifier</button>
+          </div>
+          <div id="quoteContainer"></div>
+          <p id="quoteResult" class="result-text"></p>
+        </div>
+
+        <div class="game-box">
+          <div class="box-title-row">
+            <h3>Énigmes</h3>
+            <button id="showRiddlesBtn" class="small-btn">Afficher / Masquer</button>
+          </div>
+          <div id="riddlesContainer"></div>
+        </div>
+
+        <div class="game-box">
+          <div class="box-title-row">
+            <h3>Mots mêlés</h3>
+            <button id="newWordSearchBtn" class="small-btn">Recharger</button>
+          </div>
+          <p class="hint-text">Repère les mots dans la grille.</p>
+          <div id="wordSearchGrid" class="wordsearch-grid"></div>
+          <div id="wordSearchWords" class="wordsearch-words"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="drawView" class="view">
+      <div class="section-head">
+        <h2>🎨 Dessiner et imaginer</h2>
+        <p>Dessine une scène qui représente Montagrid, un héros ou un lieu du royaume.</p>
+      </div>
+
+      <div class="draw-card">
+        <div class="draw-tools">
+          <label>Couleur
+            <input type="color" id="drawColor" value="#7a4ff1">
+          </label>
+
+          <label>Taille
+            <input type="range" id="drawSize" min="2" max="24" value="6">
+          </label>
+
+          <button id="clearCanvasBtn" class="small-btn">Effacer</button>
+          <button id="downloadCanvasBtn" class="small-btn">Télécharger</button>
+          <button id="shareCanvasBtn" class="small-btn">Partager</button>
+        </div>
+
+        <canvas id="drawCanvas" width="1200" height="520"></canvas>
+
+        <div class="draw-hint">
+          Idées : dessine le château, le temple, Théo, Melissa, une carte secrète ou une scène du chapitre.
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="lightbox" class="lightbox hidden">
+    <button id="lightboxClose" class="lightbox-close">✕</button>
+    <img id="lightboxImg" src="" alt="Agrandissement">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
